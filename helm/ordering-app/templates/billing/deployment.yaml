@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: billing
+  labels:
+    app: billing
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: billing
+  template:
+    metadata:
+      labels:
+        app: billing
+    spec:
+      containers:
+      - name: billing
+        image: 533247146470.dkr.ecr.ap-southeast-2.amazonaws.com/ordering-app_billing
+      
+      - name: RABBIT_MQ_BILLING_QUEUE
+        value: billing
+      - name: RABBIT_MQ_AUTH_QUEUE
+        value: auth
+        
